@@ -1,4 +1,5 @@
-const readline = require('readline');
+import readline from 'readline';
+import { pilihanMakanan } from './src/makanan';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -42,7 +43,7 @@ KERANJANG
 
 let cart = [];
 
-function tambah(item) {
+export function tambah(item) {
   cart[cart.length] = item;
 }
 
@@ -143,21 +144,21 @@ function checkout() {
 KERANJANG
 -----------------------------------------------------------------------------------*/
 
-function buatMenuItem(nama, harga) {
+export function buatMenuItem(nama, harga) {
   const item = {};
   item.name = nama;
   item.price = harga;
   return item;
 }
 
-const DAFTAR_MAKANAN = {
+export const DAFTAR_MAKANAN = {
   1: buatMenuItem("Nasi Goreng", 17000),
   2: buatMenuItem("Nasi Padang", 12000),
   3: buatMenuItem("Pecel Lele", 20000),
   4: buatMenuItem("Bakso", 16000),
 };
 
-const DAFTAR_MINUMAN = {
+export const DAFTAR_MINUMAN = {
   1: buatMenuItem("Es Teh Manis", 5000),
   2: buatMenuItem("Jus Jeruk", 8000),
   3: buatMenuItem("Es Kelapa", 10000),
@@ -165,88 +166,10 @@ const DAFTAR_MINUMAN = {
 };
 
 /*-----------------------------------------------------------------------------------
-MENU MAKANAN
------------------------------------------------------------------------------------*/
-
-function pilihanMakanan() {
-  console.clear();
-  console.log(`
-    ================================
-    |          # MAKANAN #         |
-    |------------------------------|
-    |    masukkan angka dibawah    |
-    |                              |
-    | 1. Nasi Goreng | Rp.17.000   |
-    | 2. Nasi Padang | Rp.12.000   |
-    | 3. Pecel Lele  | Rp.20.000   |
-    | 4. Bakso       | Rp.16.000   |
-    | 5. Kembali                   |
-    |                              |
-    ================================
-  `);
-  
-  rl.question("Pilih makanan (angka): ", function (jawaban) {
-
-    const pilihan = jawaban * 1;
-
-    if (pilihan <= 4) {
-      const item = DAFTAR_MAKANAN[pilihan];
-      tambah(item);
-      pilihanMakanan();
-      console.log("✔ " + item.name + " ditambahkan.");
-    } else if (pilihan === 5) {
-      handlePilihanMenu();
-    } else {
-      pilihanMakanan();
-      console.log("Pilihan tidak valid.");
-    }
-  });
-}
-
-/*-----------------------------------------------------------------------------------
-MENU MINUMAN
------------------------------------------------------------------------------------*/
-
-function pilihanMinuman() {
-  console.clear();
-  console.log(`
-    ================================
-    |          # MINUMAN #         |
-    |------------------------------|
-    |    masukkan angka dibawah    |
-    |                              |
-    | 1. Es Teh Manis| Rp.5.000    |
-    | 2. Jus Jeruk   | Rp.8.000    |
-    | 3. Es Kelapa   | Rp.10.000   |
-    | 4. Kopi Susu   | Rp.7.000    |
-    | 5. Kembali                   |
-    |                              |
-    ================================
-  `);
-
-  rl.question("Pilih minuman (angka): ", function (jawaban) {
-
-    const pilihan = jawaban * 1;
-
-    if (pilihan <= 4) {
-      const item = DAFTAR_MINUMAN[pilihan * 1];
-      tambah(item);
-      pilihanMinuman();
-      console.log("✔ " + item.name + " ditambahkan.");
-    } else if (pilihan === 5) {
-      handlePilihanMenu();
-    } else {
-      console.log("Pilihan tidak valid.");
-      pilihanMinuman();
-    }
-  });
-}
-
-/*-----------------------------------------------------------------------------------
 MENU UTAMA
 -----------------------------------------------------------------------------------*/
 
-function handlePilihanMenu() {
+export function handlePilihanMenu() {
   console.clear();
   console.log(`
     ============================
