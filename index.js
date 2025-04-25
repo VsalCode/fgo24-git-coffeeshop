@@ -1,6 +1,7 @@
 import readline from 'readline';
-import { pilihanMakanan } from './src/makanan';
-import { pilihanMinuman } from './src/minuman';
+import { pilihanMakanan } from './src/makanan.js';
+import { pilihanMinuman } from './src/minuman.js';
+import { checkout, lihatKeranjang } from './src/cart.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -11,7 +12,7 @@ const rl = readline.createInterface({
 MENU UTAMA
 -----------------------------------------------------------------------------------*/
 
-function menuUtama() {
+export function menuUtama() {
   console.log(`
     ============================
     |    # SELAMAT DATANG #    |
@@ -38,108 +39,6 @@ function menuUtama() {
   });
 }
 
-/*-----------------------------------------------------------------------------------
-KERANJANG
------------------------------------------------------------------------------------*/
-
-let cart = [];
-
-export function tambah(item) {
-  cart[cart.length] = item;
-}
-
-function hitung(){
-  cart.length;
-}
-
-function hitungTotal() {
-  let total = 0;
-  let i = 0;
-  while (i < cart.length) {
-    total = total + cart[i].price;
-    i = i + 1;
-  }
-  return total;
-}
-
-function tampilkan() {
-  if (cart.length === 0) {
-    console.log("Keranjang kosong.");
-    return;
-  }
-
-  let i = 0;
-  while (i < cart.length) {
-    console.log((i + 1) + ". " + cart[i].name + " - Rp." + cart[i].price);
-    i = i + 1;
-  }
-
-  console.log("\nTotal: Rp." + hitungTotal());
-}
-
-function reset() {
-  cart = [];
-}
-
-function lihatKeranjang() {
-  console.clear();
-  console.log(`
-  === KERANJANG BELANJA ===
-  `);
-
-
-  if (hitung() === 0) {
-    console.log("Keranjang kamu masih kosong. \n");
-  } else {
-    tampilkan();
-  }
-
-  rl.question(`ketik 0 untuk kembali ke menu utama: `, function (back) {
-    if (back === "0" ){
-      menuUtama();
-    }    
-  });
-}
-
-
-function checkout() {
-  console.clear();
-
-  if (hitung() === 0) {
-    console.log("Belum ada item untuk checkout.");
-    rl.question("\nKetik 0 untuk kembali ke menu utama: ", function (back) {
-      if(back === "0"){
-        console.clear();
-        menuUtama();
-      }
-    });
-    return;
-  }
-
-  console.log(`
-  === CHECKOUT ===
-  Daftar pembelian:
-  ================
-  `);
-  console.log("");
-  tampilkan();
-
-  rl.question("\nKonfirmasi pembayaran (y/n): ", function (answer) {
-    if (answer === "y" || answer === "Y") {
-      console.log("\n✅ Pembayaran berhasil!");
-      console.log("Total pembayaran: Rp." + hitungTotal());
-      console.log("Terima kasih atas pembelian Anda!");
-      reset();
-    } else {
-      console.log("\nPembayaran dibatalkan.");
-    }
-
-    rl.question("\nTekan Enter untuk kembali ke menu utama...", function () {
-      console.clear();
-      menuUtama();
-    });
-  });
-}
 
 /*-----------------------------------------------------------------------------------
 KERANJANG

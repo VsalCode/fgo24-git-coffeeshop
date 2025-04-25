@@ -1,5 +1,6 @@
 import readline from 'readline';
-import { DAFTAR_MAKANAN, handlePilihanMenu, tambah } from "..";
+import { DAFTAR_MAKANAN, handlePilihanMenu } from "../index.js";
+import { tambah } from './cart.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
