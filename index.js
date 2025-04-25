@@ -1,5 +1,6 @@
 import readline from 'readline';
 import { pilihanMakanan } from './src/makanan';
+import { pilihanMinuman } from './src/minuman';
 
 const rl = readline.createInterface({
   input: process.stdin,

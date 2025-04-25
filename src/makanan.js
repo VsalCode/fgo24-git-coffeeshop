@@ -1,4 +1,11 @@
+import readline from 'readline';
 import { DAFTAR_MAKANAN, handlePilihanMenu, tambah } from "..";
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 
 export function pilihanMakanan() {
   console.clear();
