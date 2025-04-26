@@ -1,5 +1,5 @@
 import readline from 'readline';
-import { cart, hitungTotal, reset, tampilkan } from './cart';
+import { cart, reset, tampilkan } from './cart';
 import { menuUtama } from '..';
 
 const rl = readline.createInterface({
@@ -7,7 +7,21 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-export function checkout() {
+export function hitungTotalDiscount() {
+  let total = 0;
+  let i = 0;
+  while (i < cart.length) {
+    total = total + cart[i].price;
+    i = i + 1;
+  }
+
+  const diskon = total * (10 / 100);
+
+  return diskon;
+}
+
+
+export function discount() {
   console.clear();
 
   if (cart.length === 0) {
@@ -32,7 +46,7 @@ export function checkout() {
   rl.question("\nKonfirmasi pembayaran (y/n): ", function (answer) {
     if (answer === "y" || answer === "Y") {
       console.log("\n✅ Pembayaran berhasil!");
-      console.log("Total pembayaran: Rp." + hitungTotal());
+      console.log("Total pembayaran: Rp." + hitungTotalDiscount());
       console.log("Terima kasih atas pembelian Anda!");
       reset();
     } else {

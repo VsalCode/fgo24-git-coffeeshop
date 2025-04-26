@@ -2,6 +2,7 @@ import readline from 'readline';
 import { pilihanMakanan } from './src/makanan.js';
 import { pilihanMinuman } from './src/minuman.js';
 import { checkout, lihatKeranjang } from './src/cart.js';
+import { discount } from './src/discount.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -20,6 +21,7 @@ export function menuUtama() {
     |  1. Pilih Menu           |
     |  2. Lihat Keranjang      |
     |  3. Checkout             |
+    |  4. Checkout + Diskon    |
     |  0. Keluar               |
     ============================
   `);
@@ -30,6 +32,8 @@ export function menuUtama() {
       lihatKeranjang();
     } else if (jawaban === "3") {
       checkout();
+    } else if (jawaban === "4") {
+      discount();
     } else if (jawaban === "0") {
       console.log("Terima kasih telah menggunakan program ini!");
       rl.close();

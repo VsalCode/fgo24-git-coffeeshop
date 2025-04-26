@@ -7,7 +7,7 @@ const rl = readline.createInterface({
 });
 
 
-let cart = [];
+export let cart = [];
 
 export function tambah(item) {
   cart[cart.length] = item;
